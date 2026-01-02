@@ -80,7 +80,7 @@ export default function TrophyGenerator() {
   return (
     <div className="container" style={{ paddingBottom: "4rem" }}>
       <header style={{ padding: "2rem 0", display: "flex", alignItems: "center", gap: "1rem" }}>
-        <Link href="/" style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>← Back</Link>
+
         <h1 className="title-gradient" style={{ fontSize: "2rem" }}>Trophy Configurator</h1>
       </header>
       

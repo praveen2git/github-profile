@@ -542,9 +542,7 @@ export default function ReadmeGenerator() {
   return (
     <div className="container mx-auto px-4 pb-12 max-w-4xl">
       <header className="page-header py-8 flex flex-col items-center relative">
-        <Link href="/" className="back-link absolute left-0 top-10 text-muted hover:text-white transition-colors">
-           ← Back
-        </Link>
+
         <h1 className="title-gradient text-3xl font-bold mb-4">Readme Generator</h1>
         
         <div className="stepper flex gap-4">
