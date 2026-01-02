@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function TrophyGenerator() {
-  const [username, setUsername] = useState("ryo-ma");
+  const [username, setUsername] = useState("praveen2git");
   const [theme, setTheme] = useState("flat");
   const [rank, setRank] = useState([]); // Empty means all
   const [column, setColumn] = useState(6);
@@ -12,6 +12,7 @@ export default function TrophyGenerator() {
   const [marginH, setMarginH] = useState(0);
   const [noBg, setNoBg] = useState(false);
   const [noFrame, setNoFrame] = useState(false);
+  const [origin, setOrigin] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
 
   const themes = [
@@ -24,7 +25,12 @@ export default function TrophyGenerator() {
   const availableRanks = ["SSS", "SS", "S", "AAA", "AA", "A", "B", "C", "SECRET"];
 
   useEffect(() => {
-    let url = `https://github-profile-trophy.vercel.app/?username=${username}`;
+    setOrigin(window.location.origin);
+  }, []);
+
+  useEffect(() => {
+    // Use local API
+    let url = `/api/trophy?username=${username}`;
     if (theme !== "flat") url += `&theme=${theme}`;
     if (rank.length > 0) url += `&rank=${rank.join(",")}`;
     if (column !== 6) url += `&column=${column}`;
@@ -33,6 +39,8 @@ export default function TrophyGenerator() {
     if (marginH !== 0) url += `&margin-h=${marginH}`;
     if (noBg) url += `&no-bg=true`;
     if (noFrame) url += `&no-frame=true`;
+    // Add timestamp to force refresh image
+    url += `&t=${Date.now()}`;
     setPreviewUrl(url);
   }, [username, theme, rank, column, row, marginW, marginH, noBg, noFrame]);
 
@@ -45,7 +53,9 @@ export default function TrophyGenerator() {
   };
 
   const copyToClipboard = () => {
-    const md = `[![trophy](${previewUrl})](https://github.com/${username}/github-profile-trophy)`;
+    // Ensure absolute URL for Markdown
+    const absoluteUrl = `${origin}${previewUrl}`;
+    const md = `[![trophy](${absoluteUrl})](https://github.com/${username}/github-profile)`;
     navigator.clipboard.writeText(md);
     alert("Copied to clipboard!");
   };
@@ -62,20 +72,20 @@ export default function TrophyGenerator() {
         {/* Preview Section */}
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           <div className="glass-panel" style={{ minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-            {username ? (
+            {username && previewUrl ? (
               <img src={previewUrl} alt="Trophy Preview" style={{ maxWidth: "100%", height: "auto" }} />
             ) : (
               <p style={{ color: "var(--text-muted)" }}>Enter username to generate trophy</p>
             )}
           </div>
           
-          <div className="glass-panel">
+            <div className="glass-panel">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
               <h3 style={{ fontSize: "1.1rem" }}>Markdown Snippet</h3>
               <button onClick={copyToClipboard} className="btn-primary" style={{ padding: "0.4rem 1rem", fontSize: "0.9rem" }}>Copy</button>
             </div>
             <code style={{ display: "block", padding: "1rem", background: "#000", borderRadius: "8px", overflowX: "auto", fontSize: "0.9rem", color: "#a1a1aa" }}>
-              {`[![trophy](${previewUrl})](https://github.com/${username}/github-profile-trophy)`}
+              {`[![trophy](${origin}${previewUrl})](https://github.com/${username}/github-profile)`}
             </code>
           </div>
         </div>
