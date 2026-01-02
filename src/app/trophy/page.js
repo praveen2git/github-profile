@@ -30,7 +30,26 @@ export default function TrophyGenerator() {
 
   useEffect(() => {
     // Use local API
-    let url = `/api/trophy?username=${username}`;
+    const buildUrl = (includeTimestamp) => {
+      let url = `/api/trophy?username=${username}`;
+      if (theme !== "flat") url += `&theme=${theme}`;
+      if (rank.length > 0) url += `&rank=${rank.join(",")}`;
+      if (column !== 6) url += `&column=${column}`;
+      if (row !== 3) url += `&row=${row}`;
+      if (marginW !== 0) url += `&margin-w=${marginW}`;
+      if (marginH !== 0) url += `&margin-h=${marginH}`;
+      if (noBg) url += `&no-bg=true`;
+      if (noFrame) url += `&no-frame=true`;
+      if (includeTimestamp) url += `&t=${Date.now()}`;
+      return url;
+    };
+
+    setPreviewUrl(buildUrl(true));
+  }, [username, theme, rank, column, row, marginW, marginH, noBg, noFrame]);
+
+  // Helper to get clean URL for snippet
+  const getSnippetUrl = () => {
+    let url = `${origin}/api/trophy?username=${username}`;
     if (theme !== "flat") url += `&theme=${theme}`;
     if (rank.length > 0) url += `&rank=${rank.join(",")}`;
     if (column !== 6) url += `&column=${column}`;
@@ -39,10 +58,8 @@ export default function TrophyGenerator() {
     if (marginH !== 0) url += `&margin-h=${marginH}`;
     if (noBg) url += `&no-bg=true`;
     if (noFrame) url += `&no-frame=true`;
-    // Add timestamp to force refresh image
-    url += `&t=${Date.now()}`;
-    setPreviewUrl(url);
-  }, [username, theme, rank, column, row, marginW, marginH, noBg, noFrame]);
+    return url;
+  };
 
   const toggleRank = (r) => {
     if (rank.includes(r)) {
@@ -53,11 +70,10 @@ export default function TrophyGenerator() {
   };
 
   const copyToClipboard = () => {
-    // Ensure absolute URL for Markdown
-    const absoluteUrl = `${origin}${previewUrl}`;
-    const md = `[![trophy](${absoluteUrl})](https://github.com/${username}/github-profile)`;
-    navigator.clipboard.writeText(md);
-    alert("Copied to clipboard!");
+    const url = getSnippetUrl();
+    const html = `<img src="${url}" alt="trophy" />`;
+    navigator.clipboard.writeText(html);
+    alert("Copied HTML to clipboard!");
   };
 
   return (
@@ -85,7 +101,7 @@ export default function TrophyGenerator() {
               <button onClick={copyToClipboard} className="btn-primary" style={{ padding: "0.4rem 1rem", fontSize: "0.9rem" }}>Copy</button>
             </div>
             <code style={{ display: "block", padding: "1rem", background: "#000", borderRadius: "8px", overflowX: "auto", fontSize: "0.9rem", color: "#a1a1aa" }}>
-              {`[![trophy](${origin}${previewUrl})](https://github.com/${username}/github-profile)`}
+              {`<img src="${getSnippetUrl()}" alt="trophy" />`}
             </code>
           </div>
         </div>
