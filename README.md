@@ -21,26 +21,6 @@
   </a>
 </div>
 
-> ⚠️ **Notice from the Project Owner**
->
-> Hello everyone,\
-> I am the owner of this project.
->
-> Currently, due to the increase in users and traffic, the cost of maintaining
-> this service has become quite high, and it is becoming financially difficult
-> to sustain.\
-> As costs continue to rise, there is a possibility that the service may have to
-> be discontinued.\
-> We are now at a stage where monetization and financial support are essential.
->
-> Your support in the following ways would be greatly appreciated:
->
-> 1. Financial support: [GitHub Sponsors](https://github.com/sponsors/praveen2git)
-> 2. Reducing server load through self-hosting (by forking on GitHub and
->    deploying to Vercel)
-> 3. Share your github-profile URL deployed to Vercel for load balancing
->    (Send email: saka_ro@yahoo.co.jp or Pull Request)
-
 # Quick Start
 
 Add the following code to your readme. When pasting the code into your profile's
@@ -565,3 +545,5 @@ This product is licensed under the
 # 🙏 Sponsors
 
 Your contributions help keep development going and make this work possible.
+
+github: praveen2git
