@@ -29,6 +29,7 @@ export default function Header() {
     { href: "/readme", label: "Readme" },
     { href: "/trophy", label: "Trophy" },
     { href: "/streak", label: "Streak" },
+    { href: "/visitor", label: "Visitor" },
   ];
 
   return (

@@ -36,7 +36,6 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Streak Stats Card */}
         <div className="glass-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
           <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Streak Stats</h2>
           <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", flexGrow: 1 }}>
@@ -44,6 +43,17 @@ export default function Home() {
           </p>
           <Link href="/streak" className="btn-primary" style={{ justifyContent: "center" }}>
             Generate Streak
+          </Link>
+        </div>
+
+        {/* Visitor Counter Card */}
+        <div className="glass-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Visitor Counter</h2>
+          <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", flexGrow: 1 }}>
+            Track profile visits with a customizable SVG badge.
+          </p>
+          <Link href="/visitor" className="btn-primary" style={{ justifyContent: "center" }}>
+            Create Counter
           </Link>
         </div>
 
