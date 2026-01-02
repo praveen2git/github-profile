@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container" style={{ minHeight: "100vh", padding: "4rem 0" }}>
+    <div className="container" style={{ padding: "4rem 0" }}>
       <header style={{ textAlign: "center", marginBottom: "4rem" }}>
         <h1 className="title-gradient" style={{ fontSize: "4rem", marginBottom: "1rem" }}>
           GitHub Profile Tools
@@ -36,11 +36,20 @@ export default function Home() {
           </Link>
         </div>
 
+        {/* Streak Stats Card */}
+        <div className="glass-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Streak Stats</h2>
+          <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", flexGrow: 1 }}>
+            Display your daily coding streak and contributions in a stylish SVG card.
+          </p>
+          <Link href="/streak" className="btn-primary" style={{ justifyContent: "center" }}>
+            Generate Streak
+          </Link>
+        </div>
+
       </main>
 
-      <footer style={{ marginTop: "6rem", textAlign: "center", color: "var(--text-muted)" }}>
-        <p>&copy; {new Date().getFullYear()} GitHub Tools. Built with Next.js.</p>
-      </footer>
+
     </div>
   );
 }

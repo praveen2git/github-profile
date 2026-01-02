@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import Link from "next/link";
 
 export default function TrophyGenerator() {
@@ -73,7 +74,7 @@ export default function TrophyGenerator() {
     const url = getSnippetUrl();
     const html = `<img src="${url}" alt="trophy" />`;
     navigator.clipboard.writeText(html);
-    alert("Copied HTML to clipboard!");
+    toast.success("Copied HTML to clipboard!");
   };
 
   return (

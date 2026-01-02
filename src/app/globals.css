@@ -32,6 +32,20 @@
   --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme='light'] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --bg-glass: rgba(0, 0, 0, 0.03);
+  --bg-glass-hover: rgba(0, 0, 0, 0.06);
+  
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.15);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -120,9 +134,23 @@ button {
   box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
+/* Fix for dropdowns in dark/glass mode */
+select.input-field option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
 .title-gradient {
   background: linear-gradient(to right, #fff, #a1a1aa);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
+}
+
+[data-theme='light'] .title-gradient {
+  background: linear-gradient(to right, #18181b, #52525b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
